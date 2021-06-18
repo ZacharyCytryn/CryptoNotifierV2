@@ -1,0 +1,67 @@
+﻿@model CryptoNotification.Models.NotifierModel
+@{
+    ViewData["Title"] = "Cryptocurrency Notification Form";
+}
+
+<!-- Bitcoin Live Chart -->
+<div class="nomics-ticker-widget" data-name="Bitcoin" data-base="BTC" data-quote="USD"></div>
+<script src="https://widget.nomics.com/embed.js"></script>
+
+<!-- Ethereum Live Chart -->
+<div class="nomics-ticker-widget" data-name="Ethereum" data-base="ETH" data-quote="USD"></div>
+<script src="https://widget.nomics.com/embed.js"></script>
+
+<br />
+
+<h2>Set a Notification!</h2>
+
+<br />
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Notifier</title>
+</head>
+<body>
+    @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+    {
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+                <th colspan="2" align="center">Notification Details</th>
+            </tr>
+            <tr>
+                <td>Email: </td>
+                <td>
+                    @Html.TextBoxFor(m => m.Email)
+                </td>
+            </tr>
+            <tr>
+                <td>Price: </td>
+                <td>
+                    @Html.TextBoxFor(m => m.Price)
+                </td>
+            </tr>
+            <tr>
+                <td>When To Notify: </td>
+                <td>
+                    @Html.DropDownListFor(m => m.Direction, new List<SelectListItem>
+                   { new SelectListItem{Text="Above"},
+                     new SelectListItem{Text="Below"}}, "Please select a direction")
+                </td>
+            </tr>
+            <tr>
+                <td>Cryptocurrency (USD) </td>
+                <td>
+                    @Html.DropDownListFor(m => m.Crypto, new List<SelectListItem>
+                   { new SelectListItem{Text="Bitcoin"},
+                     new SelectListItem{Text="Ethereum"}}, "Please select a currency")
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Submit" /></td>
+            </tr>
+        </table>
+    }
+</body>
+</html>
